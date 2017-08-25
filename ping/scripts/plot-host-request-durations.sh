@@ -3,6 +3,8 @@
 script_dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 gnu_datafile="gnuplot.dat"
 plot_datafile=$(mktemp)
+GRAPH_NAME=${GRAPH_NAME:-"hosts-request-duration"}
+GRAPH_FILENAME=$(echo "${GRAPH_NAME}.png" | sed -e "s/ /-/g")
 
 if [ -z "$TIME_SERIES" ]; then
     echo "Must provide TIME_SERIES variable"
@@ -54,6 +56,6 @@ awk 'NR==FNR{
 
 # Plot the timeseries
 echo "Plotting the data file ${gnu_datafile} with gnuplot..."
-gnuplot -e "data_file='${gnu_datafile}'" ${script_dir}/hosts-request-duration.gnu > hosts-request-duration.png
-echo "Plot graph: hosts-request-duration.png"
+gnuplot -e "data_file='${gnu_datafile}'" -e "graph_title='${GRAPH_NAME}'" ${script_dir}/hosts-request-duration.gnu > ${GRAPH_FILENAME}
+echo "Plot graph created: ${GRAPH_FILENAME}"
 rm -f ${gnu_datafile}
