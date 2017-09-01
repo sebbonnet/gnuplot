@@ -1,9 +1,12 @@
 # gnuplot
 
-Graph requests timings using gnuplot
+Graph requests timings using a command line tools: [gnuplot](http://www.gnuplot.info)
 
 ![Example Graph](host-request-duration-example.png?raw=true "Example Graph")
 
+## Pre-requisite 
+
+Install gnuplot - e.g. on fedora `sudo dnf install gnuplot`
 
 ## Usage
 
